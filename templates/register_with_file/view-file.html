@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Upload File</title>
+{% endblock %}
+
+{% block contain %}
+    <div class="container">
+        <h1> Your File is here: </h1>
+        <a href="#">Register & Export</a>
+        <br>
+        <table class="table">
+            <tr>
+                <th>Email</th>
+                <th>name</th>
+                <th>Password (auto-generated)</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.password }}</td>
+                </tr>
+             {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block contain %}
+    <div class="container">
+        <h1>Welcome to home</h1>
+        {% if user.is_authenticated %}
+            {% if user.is_admin %}
+                <a href="{% url 'upload_file' %}">Create User From CSV</a> |
+            {% endif %}
+            <a href="{% url 'profile' %}">Profile</a> |
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+
+    </div>
+{% endblock %}

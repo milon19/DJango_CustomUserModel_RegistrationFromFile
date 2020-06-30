@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
+
 {% block title %}
-    <title>View File</title>
+    <title>Registration Complete</title>
 {% endblock %}
 
 {% block contain %}
     <div class="container">
-        <h1> Your File is here: </h1>
-        <a href="{% url 'registration-complete' %}">Register the Users</a> |
-        {% if export %}
+        <h4>{{ no_users }} users is successfully registered. See the list below.</h4>
+         {% if export %}
             <a href="{% url 'export-csv' %}">Export CSV</a>
         {% endif %}
-
-        <br>
         <table class="table">
             <tr>
                 <th>Email</th>
                 <th>name</th>
+                <th>Password (auto-generated)</th>
             </tr>
             {% for user in users %}
                 <tr>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
+                    <td>{{ user.password }}</td>
                 </tr>
              {% endfor %}
         </table>

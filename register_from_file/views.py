@@ -64,12 +64,15 @@ def ViewUploadFile(request):
 def RegisterAllUser(request):
     base = settings.BASE_DIR
     file = base + '/register_from_file/files/user_with_password.csv'
+    file1 = base + '/register_from_file/files/user.csv'
     users = []
+    cnt = 0
     if os.path.exists(file):
         with open(file) as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
                 users.append(row)
+                cnt += 1
                 email = row['email']
                 name = row['name']
                 password = row['password']
@@ -79,4 +82,13 @@ def RegisterAllUser(request):
                 user.name = name
                 user.set_password(password)
                 user.save()
-                print('{} is registered successfully'.format(name))
+        os.remove(file)
+        os.remove(file1)
+        context = {
+            'users': users,
+            'no_users': cnt
+        }
+        return render(request, 'register_with_file/registration_compleate.html', context)
+    else:
+        return redirect('upload_file')
+
